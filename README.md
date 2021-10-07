@@ -1,4 +1,4 @@
-# Playwright -First Look
+# Playwright - First Look
 Having a quick tour around using [Playwright](https://playwright.dev/)
 
 ## Things to go look at
