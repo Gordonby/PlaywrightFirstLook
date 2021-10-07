@@ -43,3 +43,10 @@ jobs:
         env:
           filenamewordmatch: 'blog'
         run: npx playwright test --browser chromium 
+        
+        
+      - name: Playwright - Run all tests
+        continue-on-error: false 
+        env:
+          filenamewordmatch: 'blog'
+        run: npx playwright test --browser chromium --retries 3 --max-failures 1
