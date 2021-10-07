@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-blog-tests:
+  run-playwright-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +25,21 @@ jobs:
       - name: Playwright - Install OS dependencies
         run: npx playwright install-deps chromium
         
+      - name: Playwright - Install test cli
+        run: npm install -D @playwright/test
+        
+      - name: Playwright - Run example test
+        env:
+          filenamewordmatch: 'foo'
+        run: npx playwright test --browser chromium -g '${{ env.filenamewordmatch }}' --retries 1 --max-failures 5 --output test-results 
+
       - name: Playwright - Run tests on blog
         env:
-          filenamewordmatch: 'blog'
+          filenamewordmatch: 'clicking-around'
         run: npx playwright test --browser chromium -g '${{ env.filenamewordmatch }}' --retries 1 --max-failures 5 --output test-results 
+
+      - name: Playwright - Run all tests
+        continue-on-error: true #we expect this to fail
+        env:
+          filenamewordmatch: 'blog'
+        run: npx playwright test --browser chromium 
