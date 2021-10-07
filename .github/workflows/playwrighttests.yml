@@ -38,14 +38,14 @@ jobs:
           filenamewordmatch: 'clicking-around'
         run: npx playwright test --browser chromium -g '${{ env.filenamewordmatch }}' --retries 1 --max-failures 5 --output test-results 
 
-      - name: Playwright - Run all tests
+      - name: Playwright - Run all tests (ignore failures)
         continue-on-error: true #we expect this to fail
         env:
           filenamewordmatch: 'blog'
         run: npx playwright test --browser chromium 
         
         
-      - name: Playwright - Run all tests
+      - name: Playwright - Run all tests (expect a failure)
         continue-on-error: false 
         env:
           filenamewordmatch: 'blog'
